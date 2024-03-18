@@ -1,10 +1,23 @@
 import { useState } from "react"
 import "./Ideas.css"
+import Card from "../Card/Card"
 
-function Ideas() {
+function Ideas({ ideas }) {
+    
+    const ideaCards = ideas.map(idea => {
+        return (
+            <Card 
+                title={idea.title}
+                description={idea.description}
+                id={idea.id}
+                key={idea.id}
+            />
+        )
+    })
+    
     return (
-        <div>
-            <h2>Ideas go here!</h2>
+        <div className="ideas-container">
+            {ideaCards}
         </div>
     )
 }
