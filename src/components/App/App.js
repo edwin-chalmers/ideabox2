@@ -2,6 +2,7 @@ import React from "react"
 import { useState } from "react"
 import "./App.css"
 import Ideas from "../Ideas/Ideas"
+import Form from "../Form/Form"
 
 function App() {
   const dummyIdeas = [
@@ -11,13 +12,22 @@ function App() {
   ]
   const [ideas, setIdeas] = useState(dummyIdeas)
 
+  function addIdea(newIdea) {
+    setIdeas([...ideas, newIdea])
+  }
+
+  function deleteIdea(id) {
+    const filteredIdeas = ideas.filter(idea => idea.id !== id)
+    setIdeas(filteredIdeas)
+  }
+
   return (
     <main className='App'>
         <h1>IdeaBox</h1>
-        <p>This is a decription of Idea Box</p>
+        <Form addIdea={addIdea}/>
         {!ideas.length 
           ? <p>No ideas yet...</p> 
-          : <Ideas ideas={ideas} />
+          : <Ideas ideas={ideas} deleteIdea={deleteIdea}/>
         }
     </main>
   )
